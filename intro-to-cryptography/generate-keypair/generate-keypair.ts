@@ -1,0 +1,10 @@
+import { Keypair } from "@solana/web3.js";
+import {default as bs58Converter} from 'bs58';
+import "dotenv/config";
+import { getKeypairFromEnvironment } from "@solana-developers/helpers";
+const keypair = Keypair.fromSecretKey(new Uint8Array(JSON.parse(process.env.SECRET_KEY)));
+console.log(`The public key is: `, keypair.publicKey.toBase58());
+console.log(`The secret key is: `, keypair.secretKey);
+const address = bs58Converter.encode(keypair.secretKey);
+console.log(`The bs58 secret key is: `,address);
+console.log(`✅ Finished!`);
